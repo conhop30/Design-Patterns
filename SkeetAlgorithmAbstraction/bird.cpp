@@ -166,6 +166,11 @@ Crazy::Crazy(double radius, double speed, int points) : Bird()
 //    this->advance(bird, points);
 //}
 
+void Bird::advance()
+{
+   adv->advance(*this, 10);
+}
+
 /*********************************************
  * FLOATER ADVANCE
  * How the floating bird moves: strong drag and anti-gravity

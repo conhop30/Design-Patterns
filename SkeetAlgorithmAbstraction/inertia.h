@@ -5,7 +5,7 @@
 class Inertia : public Advance
 {
 public:
-    void advance(Bird & bird, int points) override { }
+   void advance(Bird & bird, int points) override;
 
 private:
 

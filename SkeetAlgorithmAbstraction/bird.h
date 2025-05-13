@@ -11,6 +11,8 @@
 #include "position.h"
 #include "advance.h"
 
+class Advance;
+
 /**********************
  * BIRD
  * Everything that can be shot
@@ -19,12 +21,12 @@ class Bird
 {
 protected:
    static Position dimensions; // size of the screen
-   Position pt;                  // position of the flyer
-   Velocity v;                // velocity of the flyer
-   double radius;             // the size (radius) of the flyer
-   bool dead;                 // is this flyer dead?
-   int points;                // how many points is this worth?
-   Advance * adv;
+   Position pt;                // position of the flyer
+   Velocity v;                 // velocity of the flyer
+   double radius;              // the size (radius) of the flyer
+   bool dead;                  // is this flyer dead?
+   int points;                 // how many points is this worth?
+   Advance* adv;
 
 public:
    Bird() : dead(false), points(0), radius(1.0) { }
@@ -52,7 +54,7 @@ public:
    void adjustPosition(Velocity v)    { pt.add(v);   }
 
    // Set bird in motion
-   void advance() { adv->advance(*this, 10); }
+   void advance();
 
    // special functions
    virtual void draw() = 0;
@@ -67,7 +69,7 @@ class Standard : public Bird
 public:
     Standard(double radius = 25.0, double speed = 5.0, int points = 10);
     void draw();
-    void advance(Bird & bird, int points);
+//    void advance(Bird & bird, int points);
 };
 
 /*********************************************

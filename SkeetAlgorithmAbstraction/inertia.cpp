@@ -4,10 +4,10 @@
 void Inertia::advance(Bird & bird, int points)
 {
     // small amount of drag
-    bird.adjustVelocity() *= 0.995;
+    bird.adjustVelocity(0.995);
 
     // inertia
-    bird.adjustPosition().add(bird.getVelocity());
+    bird.adjustPosition(bird.getVelocity());
 
     // out of bounds checker
     if (bird.isOutOfBounds())
