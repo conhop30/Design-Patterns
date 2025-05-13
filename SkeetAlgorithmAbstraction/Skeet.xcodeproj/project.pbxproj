@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		5331BADD2DD3A06E0090DB03 /* inertia.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5331BADC2DD3A06E0090DB03 /* inertia.cpp */; };
+		5331BAE02DD3AB570090DB03 /* gravity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5331BADF2DD3AB550090DB03 /* gravity.cpp */; };
+		5331BAE32DD3ADDE0090DB03 /* buoyancy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5331BAE22DD3ADDD0090DB03 /* buoyancy.cpp */; };
+		5331BAE62DD3AE8C0090DB03 /* chaos.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5331BAE52DD3AE8B0090DB03 /* chaos.cpp */; };
 		C10803212AAF7E11005CEA4E /* points.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C10803202AAF7E11005CEA4E /* points.cpp */; };
 		C15451E627403ED30095997B /* effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C15451E527403ED30095997B /* effect.cpp */; };
 		C16B8F522744ABDE009CC1DC /* score.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C16B8F502744ABDE009CC1DC /* score.cpp */; };
@@ -39,6 +42,12 @@
 		5331BADA2DD3A06E0090DB03 /* advance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = advance.h; sourceTree = "<group>"; };
 		5331BADB2DD3A06E0090DB03 /* inertia.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = inertia.h; sourceTree = "<group>"; };
 		5331BADC2DD3A06E0090DB03 /* inertia.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = inertia.cpp; sourceTree = "<group>"; };
+		5331BADE2DD3AA860090DB03 /* gravity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gravity.h; sourceTree = "<group>"; };
+		5331BADF2DD3AB550090DB03 /* gravity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gravity.cpp; sourceTree = "<group>"; };
+		5331BAE12DD3AD9A0090DB03 /* buoyancy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = buoyancy.h; sourceTree = "<group>"; };
+		5331BAE22DD3ADDD0090DB03 /* buoyancy.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = buoyancy.cpp; sourceTree = "<group>"; };
+		5331BAE42DD3AE630090DB03 /* chaos.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = chaos.h; sourceTree = "<group>"; };
+		5331BAE52DD3AE8B0090DB03 /* chaos.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = chaos.cpp; sourceTree = "<group>"; };
 		C108031F2AAF7E11005CEA4E /* points.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = points.h; sourceTree = "<group>"; };
 		C10803202AAF7E11005CEA4E /* points.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = points.cpp; sourceTree = "<group>"; };
 		C15451E427403CD70095997B /* effect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = effect.h; sourceTree = "<group>"; };
@@ -91,7 +100,13 @@
 				C1841327273E9C4700143AB2 /* bird.cpp */,
 				C1841324273E9C4400143AB2 /* bird.h */,
 				5331BADB2DD3A06E0090DB03 /* inertia.h */,
+				5331BADE2DD3AA860090DB03 /* gravity.h */,
+				5331BADF2DD3AB550090DB03 /* gravity.cpp */,
 				5331BADC2DD3A06E0090DB03 /* inertia.cpp */,
+				5331BAE12DD3AD9A0090DB03 /* buoyancy.h */,
+				5331BAE22DD3ADDD0090DB03 /* buoyancy.cpp */,
+				5331BAE42DD3AE630090DB03 /* chaos.h */,
+				5331BAE52DD3AE8B0090DB03 /* chaos.cpp */,
 				C1841325273E9C4400143AB2 /* bullet.cpp */,
 				C1841323273E9C4400143AB2 /* game.cpp */,
 				C1841326273E9C4500143AB2 /* gun.cpp */,
@@ -186,14 +201,17 @@
 				C16B8F522744ABDE009CC1DC /* score.cpp in Sources */,
 				C1D4EAED2577F57B002B56E3 /* uiInteract.cpp in Sources */,
 				C10803212AAF7E11005CEA4E /* points.cpp in Sources */,
+				5331BAE62DD3AE8C0090DB03 /* chaos.cpp in Sources */,
 				C184132A273E9C4900143AB2 /* bullet.cpp in Sources */,
 				5331BADD2DD3A06E0090DB03 /* inertia.cpp in Sources */,
+				5331BAE32DD3ADDE0090DB03 /* buoyancy.cpp in Sources */,
 				C15451E627403ED30095997B /* effect.cpp in Sources */,
 				C184132C273E9C4900143AB2 /* bird.cpp in Sources */,
 				C1D4EAEA2577F57B002B56E3 /* position.cpp in Sources */,
 				C16F25492716733A000FA407 /* time.cpp in Sources */,
 				C1841329273E9C4900143AB2 /* game.cpp in Sources */,
 				C1D4EAEB2577F57B002B56E3 /* skeet.cpp in Sources */,
+				5331BAE02DD3AB570090DB03 /* gravity.cpp in Sources */,
 				C184132B273E9C4900143AB2 /* gun.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

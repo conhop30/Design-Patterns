@@ -50,8 +50,14 @@ public:
    }
 
    // Adjustors
-   void adjustVelocity(double newVel) { v *= newVel; }
-   void adjustPosition(Velocity v)    { pt.add(v);   }
+         // velocity adjustors
+   void adjustVelocity(double newVel) { v *= newVel;     }
+   void addVelocityDy(double newVel)  { v.addDy(newVel); }
+   void addVelocityDx(double newVel)  { v.addDx(newVel); }
+         // position adjustors
+   void adjustPosition(Velocity v)    { pt.add(v);       }
+         // Points adjustors
+   void adjustPoints(int newPoints)   { points *= newPoints; }
 
    // Set bird in motion
    void advance();
@@ -81,7 +87,7 @@ class Floater : public Bird
 public:
     Floater(double radius = 30.0, double speed = 5.0, int points = 15);
     void draw();
-    void advance();
+//    void advance();
 };
 
 /*********************************************
@@ -93,7 +99,7 @@ class Crazy : public Bird
 public:
     Crazy(double radius = 30.0, double speed = 4.5, int points = 30);
     void draw();
-    void advance();
+//    void advance();
 };
 
 /*********************************************
@@ -105,5 +111,5 @@ class Sinker : public Bird
 public:
     Sinker(double radius = 30.0, double speed = 4.5, int points = 20);
     void draw();
-    void advance();
+//    void advance();
 };

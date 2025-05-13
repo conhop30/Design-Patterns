@@ -1,14 +1,22 @@
+//
+//  gravity.cpp
+//  Lab03
+//
+//  Created by William Barr on 5/13/25.
+//
+
 #include "inertia.h"
 #include "bird.h"
+#include "gravity.h"
 
 /*********************************************
- * STANDARD ADVANCE
- * How the standard bird moves - inertia and drag
+ * SINKER ADVANCE
+ * How the sinker bird moves, no drag but gravity
  *********************************************/
-void Inertia::advance(Bird & bird)
+void Gravity::advance(Bird & bird)
 {
     // small amount of drag
-    bird.adjustVelocity(0.995);
+    bird.addVelocityDy(-0.07);
 
     // inertia
     bird.adjustPosition(bird.getVelocity());

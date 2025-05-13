@@ -6,5 +6,5 @@ class Bird;
 class Advance
 {
 public:
-    virtual void advance(Bird & bird, int points) = 0;
+    virtual void advance(Bird & bird) = 0;
 };
