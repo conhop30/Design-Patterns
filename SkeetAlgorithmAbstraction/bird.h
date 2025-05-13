@@ -9,6 +9,7 @@
 
 #pragma once
 #include "position.h"
+#include "advance.h"
 
 /**********************
  * BIRD
@@ -23,31 +24,38 @@ protected:
    double radius;             // the size (radius) of the flyer
    bool dead;                 // is this flyer dead?
    int points;                // how many points is this worth?
-   
+   Advance * adv;
+
 public:
    Bird() : dead(false), points(0), radius(1.0) { }
    
    // setters
    void operator=(const Position    & rhs) { pt = rhs;    }
-   void operator=(const Velocity & rhs) { v = rhs;     }
-   void kill()                          { dead = true; }
-   void setPoints(int pts)              { points = pts;}
+   void operator=(const Velocity & rhs)    { v = rhs;     }
+   void kill()                             { dead = true; }
+   void setPoints(int pts)                 { points = pts;}
 
    // getters
-   bool isDead()           const { return dead;   }
+   bool isDead()              const { return dead;   }
    Position getPosition()     const { return pt;     }
-   Velocity getVelocity()  const { return v;      }
-   double getRadius()      const { return radius; }
-   int getPoints() const { return points; }
-   bool isOutOfBounds() const
+   Velocity getVelocity()     const { return v;      }
+   double getRadius()         const { return radius; }
+   int getPoints()            const { return points; }
+   bool isOutOfBounds()       const
    {
       return (pt.getX() < -radius || pt.getX() >= dimensions.getX() + radius ||
               pt.getY() < -radius || pt.getY() >= dimensions.getY() + radius);
    }
 
+   // Adjustors
+   void adjustVelocity(double newVel) { v *= newVel; }
+   void adjustPosition(Velocity v)    { pt.add(v);   }
+
+   // Set bird in motion
+   void advance() { adv->advance(*this, 10); }
+
    // special functions
    virtual void draw() = 0;
-   virtual void advance() = 0;
 };
 
 /*********************************************
@@ -59,7 +67,7 @@ class Standard : public Bird
 public:
     Standard(double radius = 25.0, double speed = 5.0, int points = 10);
     void draw();
-    void advance();
+    void advance(Bird & bird, int points);
 };
 
 /*********************************************
