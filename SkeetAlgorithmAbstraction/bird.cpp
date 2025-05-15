@@ -173,6 +173,12 @@ Crazy::Crazy(double radius, double speed, int points) : Bird()
  /***************************************************************/
  /***************************************************************/
 
+void Bird::advance()
+{
+   adv->advance(*this);
+}
+
+
 /*********************************************
  * STANDARD ADVANCE
  * How the standard bird moves - inertia and drag
@@ -182,10 +188,7 @@ Crazy::Crazy(double radius, double speed, int points) : Bird()
 //    this->advance(bird, points);
 //}
 
-void Bird::advance()
-{
-   adv->advance(*this);
-}
+
 
 /*********************************************
  * FLOATER ADVANCE

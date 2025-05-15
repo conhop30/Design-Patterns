@@ -64,6 +64,9 @@ public:
 
    // special functions
    virtual void draw() = 0;
+   
+   // desctructor
+   virtual ~Bird() { }
 };
 
 /*********************************************
