@@ -18,7 +18,6 @@
 class Bird
 {
 private:
-    BirdColleague* pColleague = new BirdColleague;
 
 protected:
    static Position dimensions; // size of the screen
@@ -27,7 +26,9 @@ protected:
    double radius;             // the size (radius) of the flyer
    bool dead;                 // is this flyer dead?
    int points;                // how many points is this worth?
-   
+
+   BirdColleague* pColleague = new BirdColleague;
+
 public:
    Bird() : dead(false), points(0), radius(1.0) { }
    

@@ -167,7 +167,7 @@ void Standard::advance()
    if (isOutOfBounds())
    {
       kill();
-      points *= -1; // points go negative when it is missed!
+      pColleague->wentOutOfBounds(); // points go negative when it is missed!
    }
 }
 

@@ -8,7 +8,7 @@ class Bird;
 class BirdColleague : AbstractColleague
 {
 private:
-    Message* status = new Message;
+    Message* message = new Message;
     Bird* pBird;
 
 public:

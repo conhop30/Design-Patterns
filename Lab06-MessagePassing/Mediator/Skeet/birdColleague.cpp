@@ -3,14 +3,14 @@
 
 void BirdColleague::wentOutOfBounds()
 {
-    status->type = BIRD_DIED;
-    status->value = -pBird->getPoints();
-    mediator->notify(*status);
+    message->type = BIRD_DIED;
+    message->value = -pBird->getPoints();
+    mediator->notify(*message);
 }
 
 void BirdColleague::wasShot()
 {
-    status->type = BIRD_DIED;
-    status->value = pBird->getPoints();
-    mediator->notify(*status);
+    message->type = BIRD_DIED;
+    message->value = pBird->getPoints();
+    mediator->notify(*message);
 }
