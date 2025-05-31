@@ -2,7 +2,9 @@
 
 #include "abstractColleague.h"
 
-class bulletColleague : AbstractColleague
+class BulletColleague : AbstractColleague
 {
+    void firedBullet();
+
 };
 

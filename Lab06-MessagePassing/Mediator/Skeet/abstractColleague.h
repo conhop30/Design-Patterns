@@ -2,7 +2,7 @@
 
 // Forward declarations
 class Mediator;
-enum class Message;
+struct Message;
 
 /*
 * CLASS : ABSTRACT COLLEAGUE
@@ -13,7 +13,7 @@ protected:
     Mediator* mediator;
 
 public:
-    virtual void notify(Message message) = 0;
-    void enroll(Mediator* mediator)   { }
-    void unenroll(Mediator* mediator) { }
+    virtual void notify(Message & message) = 0;
+    void enroll(Mediator & mediator);
+    void unenroll(Mediator & mediator);
 };

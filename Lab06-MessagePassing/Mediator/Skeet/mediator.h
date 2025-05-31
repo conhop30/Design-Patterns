@@ -1,12 +1,18 @@
 #pragma once
 
-#include "abstractColleague.h"
 #include <vector>
 
+class AbstractColleague;
+
 /**
-* ENUM : MESSAGE
+* ENUM : MESSAGE TYPE
 */
-enum Message { BIRD_DIED, BULLET_FIRED };
+enum MessageType { BIRD_DIED, BULLET_FIRED };
+
+/**
+* STRUCT : MESSAGE
+*/
+struct Message { MessageType type; int value; };
 
 /*
 * CLASS : MEDIATOR
@@ -17,7 +23,7 @@ protected:
     std::vector<AbstractColleague*> colleagues;
 
 public:
-    void notify(Message message) {}
+    void notify(Message & message);
     void enroll(std::vector<AbstractColleague*> colleagues) {}
     void unenroll(std::vector<AbstractColleague*> colleagues) {}
 };

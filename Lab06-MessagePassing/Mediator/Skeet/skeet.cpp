@@ -91,6 +91,7 @@ void Skeet::animate()
             points.push_back(Points((*it)->getPosition(), (*it)->getPoints()));
          score.adjust((*it)->getPoints());
          it = birds.erase(it);
+         //delete (*it);
       }
       else
          ++it;
