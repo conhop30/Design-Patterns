@@ -154,6 +154,7 @@ protected:
    int value;
 };
 
+
 class BulletLogic
 {
 public:
@@ -172,7 +173,16 @@ protected:
    //put random methods in here
 };
 
+
 class BulletInterface
 {
+public:
+   BulletLogic logic;
    
+   virtual void input(bool isUp, bool isDown, bool isB);
+   virtual void move(std::list <Effect*>);
+   
+protected:
+   void drawLine(Position begin, Position end, double red, double green, double blue);
+   void drawDot(Position point, double radius, double green, double blue);
 };
