@@ -145,6 +145,18 @@ public:
 
 class BulletStorage
 {
+public:
+   BulletStorage(double angle, double speed, double radius, int value);
+   
+   //getters
+   Position getPoint()      { return pt;         }
+   Position getDimensions() { return dimensions; }
+   Velocity getVelocity()   { return v;          }
+   double getRadius()       { return radius;     }
+   
+   //setters
+   void setValue( int value ) { this->value = value; }
+   
 protected:
    static Position dimensions;
    Position pt;
@@ -160,7 +172,6 @@ class BulletLogic
 public:
    BulletStorage storage;
    
-//   Bullet(double angle, double speed, double radius, int, value)
    void kill();
    void setValue();
    Position getPosition();
