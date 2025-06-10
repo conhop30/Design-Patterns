@@ -78,7 +78,7 @@ void Skeet::animate()
                effects.push_back(new Fragment(bullet->getPosition(), bullet->getVelocity()));
             element->kill();
             bullet->kill();
-            hitRatio.adjust(1);
+            element->wasShot();
             bullet->setValue(-(element->getPoints()));
             element->setPoints(0);
          }
@@ -91,6 +91,7 @@ void Skeet::animate()
             points.push_back(Points((*it)->getPosition(), (*it)->getPoints()));
          score.adjust((*it)->getPoints());
          it = birds.erase(it);
+         //delete (*it);
       }
       else
          ++it;

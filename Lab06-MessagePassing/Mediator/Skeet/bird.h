@@ -9,6 +9,7 @@
 
 #pragma once
 #include "position.h"
+#include "birdColleague.h"
 
 /**********************
  * BIRD
@@ -16,6 +17,8 @@
  **********************/
 class Bird
 {
+private:
+
 protected:
    static Position dimensions; // size of the screen
    Position pt;                  // position of the flyer
@@ -23,7 +26,9 @@ protected:
    double radius;             // the size (radius) of the flyer
    bool dead;                 // is this flyer dead?
    int points;                // how many points is this worth?
-   
+
+   BirdColleague* pColleague = new BirdColleague;
+
 public:
    Bird() : dead(false), points(0), radius(1.0) { }
    
@@ -44,6 +49,9 @@ public:
       return (pt.getX() < -radius || pt.getX() >= dimensions.getX() + radius ||
               pt.getY() < -radius || pt.getY() >= dimensions.getY() + radius);
    }
+
+   // Mediator-specific functions
+   void wasShot() { }
 
    // special functions
    virtual void draw() = 0;
