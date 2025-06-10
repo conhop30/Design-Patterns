@@ -25,7 +25,13 @@ class BulletLogic
 
 class BulletStorage
 {
-   
+protected:
+   static Position dimensions;
+   Position pt;
+   Velocity v;
+   double radius;
+   bool dead;
+   int value;
 };
 
 /*********************************************
