@@ -177,6 +177,7 @@ public:
    Velocity getVelocity() { return storage.getVelocity();  }
    double getRadius()     { return storage.getRadius();    }
    virtual void death(std::list<Bullet*> bullets);
+   virtual void move(std::list <Effect*>);
    
 protected:
    bool isOutOfBounds();
@@ -192,7 +193,7 @@ public:
    BulletLogic logic;
    
    virtual void input(bool isUp, bool isDown, bool isB);
-   virtual void move(std::list <Effect*>);
+   
    
 protected:
    void drawLine(Position begin, Position end, double red, double green, double blue);
