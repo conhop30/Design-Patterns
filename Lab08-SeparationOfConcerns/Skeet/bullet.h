@@ -141,8 +141,7 @@ public:
 };
 
 
-
-
+// separation of concerns pattern stuff here
 class BulletStorage
 {
 public:
@@ -174,14 +173,16 @@ public:
    
    void kill();
    void setValue();
-   Position getPosition();
-   Velocity getVelocity();
-   double getRadius();
+   Position getPosition() { return storage.getPoint();     }
+   Velocity getVelocity() { return storage.getVelocity();  }
+   double getRadius()     { return storage.getRadius();    }
    virtual void death(std::list<Bullet*> bullets);
    
 protected:
    bool isOutOfBounds();
    //put random methods in here
+   int    random(int    min, int    max);
+   double random(double min, double max);
 };
 
 
