@@ -13,26 +13,7 @@
 #include <list>
 #include <cassert>
 
-class BulletInterface
-{
-   
-};
 
-class BulletLogic
-{
-   
-};
-
-class BulletStorage
-{
-protected:
-   static Position dimensions;
-   Position pt;
-   Velocity v;
-   double radius;
-   bool dead;
-   int value;
-};
 
 /*********************************************
  * BULLET
@@ -157,4 +138,41 @@ public:
          v.turn(-0.04);
    }
    void move(std::list<Effect*> & effects);
+};
+
+
+
+
+class BulletStorage
+{
+protected:
+   static Position dimensions;
+   Position pt;
+   Velocity v;
+   double radius;
+   bool dead;
+   int value;
+};
+
+class BulletLogic
+{
+public:
+   BulletStorage storage;
+   
+//   Bullet(double angle, double speed, double radius, int, value)
+   void kill();
+   void setValue();
+   Position getPosition();
+   Velocity getVelocity();
+   double getRadius();
+   virtual void death(std::list<Bullet*> bullets);
+   
+protected:
+   bool isOutOfBounds();
+   //put random methods in here
+};
+
+class BulletInterface
+{
+   
 };
