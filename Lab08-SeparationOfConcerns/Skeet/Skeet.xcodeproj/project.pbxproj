@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5328B3BE2DE8C7C000CB2126 /* visitor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5328B3BD2DE8C7B700CB2126 /* visitor.cpp */; };
 		C10803212AAF7E11005CEA4E /* points.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C10803202AAF7E11005CEA4E /* points.cpp */; };
 		C15451E627403ED30095997B /* effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C15451E527403ED30095997B /* effect.cpp */; };
 		C16B8F522744ABDE009CC1DC /* score.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C16B8F502744ABDE009CC1DC /* score.cpp */; };
@@ -36,10 +35,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5328B3BD2DE8C7B700CB2126 /* visitor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = visitor.cpp; sourceTree = "<group>"; };
-		532FF3322DE623380046E914 /* Skeet.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Skeet.xcodeproj; sourceTree = "<group>"; };
-		532FF3352DE629FE0046E914 /* flyingObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = flyingObject.h; sourceTree = "<group>"; };
-		532FF3372DE8012E0046E914 /* visitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = visitor.h; sourceTree = "<group>"; };
 		C108031F2AAF7E11005CEA4E /* points.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = points.h; sourceTree = "<group>"; };
 		C10803202AAF7E11005CEA4E /* points.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = points.cpp; sourceTree = "<group>"; };
 		C15451E427403CD70095997B /* effect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = effect.h; sourceTree = "<group>"; };
@@ -79,11 +74,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		532FF3332DE623380046E914 /* Products */ = {
-			isa = PBXGroup;
-			name = Products;
-			sourceTree = "<group>";
-		};
 		C1D4EACA2577F487002B56E3 = {
 			isa = PBXGroup;
 			children = (
@@ -93,12 +83,9 @@
 				C16B8F502744ABDE009CC1DC /* score.cpp */,
 				C15451E527403ED30095997B /* effect.cpp */,
 				C15451E427403CD70095997B /* effect.h */,
-				532FF3372DE8012E0046E914 /* visitor.h */,
-				5328B3BD2DE8C7B700CB2126 /* visitor.cpp */,
 				C1841327273E9C4700143AB2 /* bird.cpp */,
 				C1841324273E9C4400143AB2 /* bird.h */,
 				C1841325273E9C4400143AB2 /* bullet.cpp */,
-				532FF3352DE629FE0046E914 /* flyingObject.h */,
 				C1841323273E9C4400143AB2 /* game.cpp */,
 				C1841326273E9C4500143AB2 /* gun.cpp */,
 				C1841328273E9C4900143AB2 /* skeet.h */,
@@ -108,7 +95,6 @@
 				C179F5FD2710DE0E00BD3050 /* gun.h */,
 				C1D4EAE22577F575002B56E3 /* skeet.cpp */,
 				C1D4EAE12577F574002B56E3 /* position.cpp */,
-				532FF3322DE623380046E914 /* Skeet.xcodeproj */,
 				C1D4EAE42577F575002B56E3 /* position.h */,
 				C1D4EAE52577F576002B56E3 /* uiInteract.cpp */,
 				C1D4EAE62577F578002B56E3 /* uiInteract.h */,
@@ -178,12 +164,6 @@
 			mainGroup = C1D4EACA2577F487002B56E3;
 			productRefGroup = C1D4EAD42577F487002B56E3 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 532FF3332DE623380046E914 /* Products */;
-					ProjectRef = 532FF3322DE623380046E914 /* Skeet.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				C1D4EAD22577F487002B56E3 /* Lab03 */,
@@ -204,7 +184,6 @@
 				C184132C273E9C4900143AB2 /* bird.cpp in Sources */,
 				C1D4EAEA2577F57B002B56E3 /* position.cpp in Sources */,
 				C16F25492716733A000FA407 /* time.cpp in Sources */,
-				5328B3BE2DE8C7C000CB2126 /* visitor.cpp in Sources */,
 				C1841329273E9C4900143AB2 /* game.cpp in Sources */,
 				C1D4EAEB2577F57B002B56E3 /* skeet.cpp in Sources */,
 				C184132B273E9C4900143AB2 /* gun.cpp in Sources */,

@@ -303,14 +303,18 @@ void Skeet::drawLevel() const
    gun.display();
          
    // output the birds, bullets, and fragments
+   VisitorDraw draw;
    for (auto& pts : points)
       pts.show();
    for (auto effect : effects)
-      effect->render();
+      effect->accept(draw);
+
    for (auto bullet : bullets)
-      bullet->output();
+      bullet->accept(draw);
+
    for (auto element : birds)
-      element->draw();
+      element->accept(draw);
+
    
    // status
    drawText(Position(10,                         dimensions.getY() - 30), score.getText()  );

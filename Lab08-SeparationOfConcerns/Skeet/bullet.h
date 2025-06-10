@@ -13,6 +13,21 @@
 #include <list>
 #include <cassert>
 
+class BulletInterface
+{
+   
+};
+
+class BulletLogic
+{
+   
+};
+
+class BulletStorage
+{
+   
+};
+
 /*********************************************
  * BULLET
  * Something to shoot something else

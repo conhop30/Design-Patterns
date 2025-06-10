@@ -12,12 +12,14 @@
 #include "effect.h"
 #include <list>
 #include <cassert>
+#include "flyingObject.h"
+
 
 /*********************************************
  * BULLET
  * Something to shoot something else
  *********************************************/
-class Bullet
+class Bullet : FlyingObject
 {
 protected:
    static Position dimensions;   // size of the screen
@@ -46,6 +48,7 @@ public:
    virtual void output() = 0;
    virtual void input(bool isUp, bool isDown, bool isB) {}
    virtual void move(std::list<Effect*> &effects);
+   virtual void accept(Visitor & visitor) override { visitor.visit(*this); }
 
 protected:
    bool isOutOfBounds() const
