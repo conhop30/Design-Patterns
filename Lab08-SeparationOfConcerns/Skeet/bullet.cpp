@@ -259,3 +259,44 @@ double Bullet::random(double min, double max)
    assert(min <= num && num <= max);
    return num;
 }
+
+
+
+/******************************************************************
+ * Separation of Concerns bullet stuff here now
+ * This is where we be putting the new methods and stuff I guess
+ ****************************************************************/
+
+/******************************************************************
+ * BulletStorage constructor
+ * default constructor
+ ****************************************************************/
+BulletStorage::BulletStorage(double angle, double speed, double radius, int value) :
+   dead(false), radius(radius), value(value)
+{
+   // set the initial position
+   pt.setX(dimensions.getX() - 1.0);
+   pt.setY(1.0);
+   assert(pt.getX() > 100.0);
+
+   // set the initial velocity
+   v.setDx(-speed * cos(angle));
+   v.setDy(speed * sin(angle));
+   assert(v.getDx() <= 0.0);
+   assert(v.getDy() >= 0.0);
+}
+
+/******************************************************************
+ * DEATH
+ * kill the bullet
+ ****************************************************************/
+//void BulletLogic::death(std::list<Bullet*> bullets)
+//{
+////   this->storage.setDead() = true;
+//}
+
+
+/******************************************************************
+ * DEATH
+ * kill the bullet
+ ****************************************************************/
