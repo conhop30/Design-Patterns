@@ -176,8 +176,8 @@ public:
    Position getPosition() { return storage.getPoint();     }
    Velocity getVelocity() { return storage.getVelocity();  }
    double getRadius()     { return storage.getRadius();    }
-   virtual void death(std::list<Bullet*> bullets);
-   virtual void move(std::list <Effect*>);
+   virtual void death(std::list<Bullet *> & bullets);
+   virtual void move(std::list<Effect*> &effects);
    
 protected:
    bool isOutOfBounds();

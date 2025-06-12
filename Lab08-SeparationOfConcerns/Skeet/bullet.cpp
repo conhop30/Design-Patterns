@@ -290,13 +290,17 @@ BulletStorage::BulletStorage(double angle, double speed, double radius, int valu
  * DEATH
  * kill the bullet
  ****************************************************************/
-//void BulletLogic::death(std::list<Bullet*> bullets)
-//{
-////   this->storage.setDead() = true;
-//}
+void BulletLogic::death(std::list<Bullet*> & bullets)
+{
+//   this->storage.setDead() = true;
+}
 
 
 /******************************************************************
- * DEATH
+ * Move
  * kill the bullet
  ****************************************************************/
+void BulletLogic::move(std::list<Effect*> &effects)
+{
+//   this->storage.setDead() = true;
+}
