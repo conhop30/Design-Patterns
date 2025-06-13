@@ -482,3 +482,55 @@ void BulletInterface::drawDot(const Position& point, double radius,
    glColor3f((GLfloat)1.0 /* red % */, (GLfloat)1.0 /* green % */, (GLfloat)1.0 /* blue % */);
    glEnd();
 }
+
+/*********************************************
+ * PELLET OUTPUT
+ * Draw a pellet - just a 3-pixel dot
+ *********************************************/
+void PelletInterface::output()
+{
+   if (!logic.isDead())
+      drawDot(logic.getPoint(), 3.0, 1.0, 1.0, 0.0);
+}
+
+/*********************************************
+ * BOMB OUTPUT
+ * Draw a bomb - many dots to make it have a soft edge
+ *********************************************/
+void BombInterface::output()
+{
+   if (!logic.isDead())
+   {
+       // Bomb actually has a gradient to cut out the harsh edges
+       drawDot(logic.getPoint(), logic.getRadius() + 2.0, 0.50, 0.50, 0.00);
+       drawDot(logic.getPoint(), logic.getRadius() + 1.0, 0.75, 0.75, 0.00);
+       drawDot(logic.getPoint(), logic.getRadius() + 0.0, 0.87, 0.87, 0.00);
+       drawDot(logic.getPoint(), logic.getRadius() - 1.0, 1.00, 1.00, 0.00);
+   }
+}
+
+/*********************************************
+ * SHRAPNEL OUTPUT
+ * Draw a fragment - a bright yellow dot
+ *********************************************/
+void ShrapnelInterface::output()
+{
+    if (!logic.isDead())
+       drawDot(logic.getPoint(), logic.getRadius(), 1.0, 1.0, 0.0);
+}
+
+/*********************************************
+ * MISSILE OUTPUT
+ * Draw a missile - a line and a dot for the fins
+ *********************************************/
+void MissileInterface::output()
+{
+    if (!logic.isDead())
+    {
+        // missile is a line with a dot at the end so it looks like fins.
+        Position ptNext(logic.getPoint());
+        ptNext.add(logic.getVelocity());
+        drawLine(logic.getPoint(), ptNext, 1.0, 1.0, 0.0);
+        drawDot(logic.getPoint(), 3.0, 1.0, 1.0, 1.0);
+    }
+}

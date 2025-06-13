@@ -158,6 +158,7 @@ public:
    Velocity getVelocity()   { return v;          }
    double getRadius()       { return radius;     }
    int getTimeToDie()       { return timeToDie;  }
+   bool isDead()            { return dead; }
    
    //setters
    void setValue( int value )     { this->value = value; }
@@ -187,6 +188,8 @@ public:
    Position getPosition() { return storage.getPoint();     }
    Velocity getVelocity() { return storage.getVelocity();  }
    double getRadius()     { return storage.getRadius();    }
+   Position getPoint()    { return storage.getPoint(); }
+   bool isDead()          { return storage.isDead(); }
    virtual void death(std::list<Bullet *> & bullets);
    virtual void move(std::list<Effect*> &effects);
    
@@ -250,14 +253,6 @@ class ShrapnelLogic : public BulletLogic
  **********************/
 class MissileLogic : public BulletLogic
 {
-   void input(bool isUp, bool isDown, bool isB)
-   {
-      if (isUp)
-         storage.getVelocity().turn(0.04);
-      if (isDown)
-         storage.getVelocity().turn(-0.04);
-   }
-   
    void move(std::list<Effect*> & effects) override;
 };
 
@@ -267,7 +262,7 @@ class MissileLogic : public BulletLogic
  **********************/
 class PelletInterface : public BulletInterface
 {
-   
+   void output();
 };
 
 /*********************
@@ -276,7 +271,7 @@ class PelletInterface : public BulletInterface
  **********************/
 class BombInterface : public BulletInterface
 {
-   
+   void output();
 };
 
 /*********************
@@ -285,7 +280,7 @@ class BombInterface : public BulletInterface
  **********************/
 class ShrapnelInterface : public BulletInterface
 {
-   
+   void output();
 };
 
 /*********************
@@ -294,5 +289,13 @@ class ShrapnelInterface : public BulletInterface
  **********************/
 class MissileInterface : public BulletInterface
 {
+   void input(bool isUp, bool isDown, bool isB)
+   {
+      if (isUp)
+         logic.getVelocity().turn(0.04);
+      if (isDown)
+         logic.getVelocity().turn(-0.04);
+   }
    
+   void output();
 };
