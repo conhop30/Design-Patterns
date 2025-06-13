@@ -141,6 +141,11 @@ public:
 };
 
 
+
+
+
+
+
 // separation of concerns pattern stuff here
 class BulletStorage
 {
@@ -152,10 +157,14 @@ public:
    Position getDimensions() { return dimensions; }
    Velocity getVelocity()   { return v;          }
    double getRadius()       { return radius;     }
+   int getTimeToDie()       { return timeToDie;  }
    
    //setters
-   void setValue( int value ) { this->value = value; }
-   void setPoint( Position & pt ) { this->pt = pt;   }
+   void setValue( int value )     { this->value = value; }
+   void setPoint( const Position & pt ) { this->pt = pt;   }
+   void setDead( bool isDead )    { this->dead = isDead; }
+   void setTimeToDie( int time )  { this->timeToDie = time; }
+//   void setVelocity( Velocity v ) { this->v = v; }
    
 protected:
    static Position dimensions;
@@ -164,6 +173,7 @@ protected:
    double radius;
    bool dead;
    int value;
+   int timeToDie = 0;
 };
 
 
@@ -172,13 +182,15 @@ class BulletLogic
 public:
    BulletStorage storage;
    
-   void kill();
-   void setValue();
+   void kill() { storage.setDead(true); }
+   void setValue(int newValue) { storage.setValue(newValue); }
    Position getPosition() { return storage.getPoint();     }
    Velocity getVelocity() { return storage.getVelocity();  }
    double getRadius()     { return storage.getRadius();    }
    virtual void death(std::list<Bullet *> & bullets);
    virtual void move(std::list<Effect*> &effects);
+   
+   virtual BulletStorage createBulletStorage(double angle, double speed, double radius, int value);
    
 protected:
    bool isOutOfBounds();
@@ -193,10 +205,94 @@ class BulletInterface
 public:
    BulletLogic logic;
    
-   virtual void input(bool isUp, bool isDown, bool isB);
+   virtual void input(bool isUp, bool isDown, bool isB) {}
    
    
 protected:
-   void drawLine(Position begin, Position end, double red, double green, double blue);
-   void drawDot(Position point, double radius, double green, double blue);
+   void drawLine(const Position& begin, const Position& end, double red, double green, double blue) const;
+   void drawDot(const Position& point, double radius, double red, double green, double blue) const;
+};
+
+/*********************
+ * PELLET LOGIC
+ * logic for a small little bullet
+ **********************/
+class PelletLogic : public BulletLogic
+{
+   BulletStorage createBulletStorage(double angle, double speed = 15.0, double radius = 1.0, int value = 1) override { return BulletStorage(angle, speed, radius, value); }
+};
+
+/*********************
+ * BOMB LOGIC
+ * logic for things that go "boom"
+ **********************/
+class BombLogic : public BulletLogic
+{
+   BulletStorage createBulletStorage(double angle, double speed = 10.0, double radius = 4.0, int value = 4) override { return BulletStorage(angle, speed, radius, value); storage.setTimeToDie(60); }
+   
+   void move(std::list<Effect*> & effects)   override;
+   void death(std::list<BulletStorage *> & bullets);
+};
+
+/*********************
+ * SHRAPNEL LOGIC
+ * logic for a piece that broke off of a bomb
+ **********************/
+class ShrapnelLogic : public BulletLogic
+{
+   BulletStorage createBulletStorageForShrapnel(BulletStorage & bombStorage);
+   void move(std::list<Effect*> & effects)   override;
+};
+
+/*********************
+ * MISSILE LOGIC
+ * logic for guided missiles
+ **********************/
+class MissileLogic : public BulletLogic
+{
+   void input(bool isUp, bool isDown, bool isB)
+   {
+      if (isUp)
+         storage.getVelocity().turn(0.04);
+      if (isDown)
+         storage.getVelocity().turn(-0.04);
+   }
+   
+   void move(std::list<Effect*> & effects) override;
+};
+
+/*********************
+ * Pellet Interface
+ * People gotta be able to look at them pellets
+ **********************/
+class PelletInterface : public BulletInterface
+{
+   
+};
+
+/*********************
+ * Bomb Interface
+ * People gotta be able to look at them Bombs
+ **********************/
+class BombInterface : public BulletInterface
+{
+   
+};
+
+/*********************
+ * Shrapnel Interface
+ * People gotta be able to look at them Shrapnels
+ **********************/
+class ShrapnelInterface : public BulletInterface
+{
+   
+};
+
+/*********************
+ * Missile Interface
+ * People gotta be able to look at them Missiles
+ **********************/
+class MissileInterface : public BulletInterface
+{
+   
 };

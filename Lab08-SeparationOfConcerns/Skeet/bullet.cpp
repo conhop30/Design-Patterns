@@ -286,13 +286,39 @@ BulletStorage::BulletStorage(double angle, double speed, double radius, int valu
    assert(v.getDy() >= 0.0);
 }
 
+
+// Bullet logic
+
+/******************************************************************
+ * create an instance of bullet storage
+ * store the bullet
+ ****************************************************************/
+BulletStorage BulletLogic::createBulletStorage(double angle, double speed, double radius, int value)
+{
+   return BulletStorage(angle, speed, radius, value);
+}
+
 /******************************************************************
  * DEATH
  * kill the bullet
  ****************************************************************/
 void BulletLogic::death(std::list<Bullet*> & bullets)
 {
-//   this->storage.setDead() = true;
+   this->storage.setDead(true);
+}
+
+/******************************************************************
+ * ISOUTOFBOUNDS
+ * checks to see if the bullet is out of bounds
+ ****************************************************************/
+bool BulletLogic::isOutOfBounds()
+{
+   Position pt = storage.getPoint();
+   
+   return (pt.getX() < -storage.getRadius()
+           || pt.getX() >= storage.getDimensions().getX() + storage.getRadius()
+           || pt.getY() < -storage.getRadius()
+           || pt.getY() >= storage.getDimensions().getY() + storage.getRadius());
 }
 
 
@@ -308,6 +334,151 @@ void BulletLogic::move(std::list<Effect*> &effects)
    storage.setPoint(pt);
    
    // out of bounds checker
-   //   if (isOutOfBounds())
-   //      kill();}
+      if (isOutOfBounds())
+         kill();
+}
+
+/******************************************************************
+ * RANDOM
+ * This function generates a random number.
+ ****************************************************************/
+int BulletLogic::random(int min, int max)
+{
+   assert(min < max);
+   int num = (rand() % (max - min)) + min;
+   assert(min <= num && num <= max);
+   return num;
+}
+double BulletLogic::random(double min, double max)
+{
+   assert(min <= max);
+   double num = min + ((double)rand() / (double)RAND_MAX * (max - min));
+   assert(min <= num && num <= max);
+   return num;
+}
+
+
+/*********************************************
+ * BOMB LOGIC MOVE
+ * Move the bomb along by one time period
+ *********************************************/
+void BombLogic::move(std::list<Effect*> & effects)
+{
+    // kill if it has been around too long
+    storage.setTimeToDie(storage.getTimeToDie() - 1);
+    if (!storage.getTimeToDie())
+        kill();
+
+    // do the inertia thing
+    BulletLogic::move(effects);
+}
+
+/*********************************************
+ * BOMB LOGIC DEATH
+ * Bombs have a tendency to explode! coolbeans
+ *********************************************/
+void BombLogic::death(std::list<BulletStorage*>& bullets)
+{
+   for (int i = 0; i < 20; i++)
+      {
+         BulletStorage* bullet = new BulletStorage(random(0.0, 6.2),
+                                                   random(10.0, 15.0),
+                                                   3.0,
+                                                   0);
+         bullet->setPoint(storage.getPoint());
+         bullets.push_back(bullet);
+      }
+
+}
+
+/*********************************************
+ * SHRAPNEL CREATION
+ * the bomb shrapnel has to be made
+ *********************************************/
+BulletStorage ShrapnelLogic::createBulletStorageForShrapnel(BulletStorage & bombStorage)
+{
+   BulletStorage bullet(random(0.0, 6.2),
+                        random(10.0, 15.0),
+                        3.0,
+                        0);
+   bullet.setPoint(bombStorage.getPoint());
+   return bullet;
+}
+
+/*********************************************
+ * SHRAPNEL LOGIC MOVE
+ * Move the shrapnel along by one time period
+ *********************************************/
+void ShrapnelLogic::move(std::list<Effect*> & effects)
+{
+    // kill if it has been around too long
+    storage.setTimeToDie(storage.getTimeToDie() - 1);
+    if (!storage.getTimeToDie())
+        kill();
+   
+   // add a streek
+   effects.push_back(new Streek(storage.getPoint(), storage.getVelocity()));
+
+   // do the inertia thing
+   BulletLogic::move(effects);
+}
+
+/*********************************************
+ * MISSILE LOGIC MOVE
+ * Move the Missile along by one time period
+ *********************************************/
+void MissileLogic::move(std::list<Effect*> & effects)
+{
+   // kill if it has been around too long
+   effects.push_back(new Exhaust(storage.getPoint(), storage.getVelocity()));
+   
+   // do the inertia thing
+   BulletLogic::move(effects);
+}
+
+
+
+//bullet interface stuff
+
+/************************************************************************
+ * DRAW LINE
+ * Draw a line on the screen from the beginning to the end.
+ *************************************************************************/
+void BulletInterface::drawLine(const Position& begin, const Position& end,
+                      double red, double green, double blue) const
+{
+   // Get ready...
+   glBegin(GL_LINES);
+   glColor3f((GLfloat)red, (GLfloat)green, (GLfloat)blue);
+
+   // Draw the actual line
+   glVertexPoint(begin);
+   glVertexPoint(end);
+
+   // Complete drawing
+   glColor3f((GLfloat)1.0 /* red % */, (GLfloat)1.0 /* green % */, (GLfloat)1.0 /* blue % */);
+   glEnd();
+}
+
+/************************************************************************
+ * DRAW DOT
+ * Draw a single point (square actually on the screen, r pixels by r pixels
+ *************************************************************************/
+void BulletInterface::drawDot(const Position& point, double radius,
+                     double red, double green, double blue) const
+{
+   // Get ready, get set...
+   glBegin(GL_TRIANGLE_FAN);
+   glColor3f((GLfloat)red, (GLfloat)green, (GLfloat)blue);
+   double r = radius / 2.0;
+
+   // Go...
+   glVertex2f((GLfloat)(point.getX() - r), (GLfloat)(point.getY() - r));
+   glVertex2f((GLfloat)(point.getX() + r), (GLfloat)(point.getY() - r));
+   glVertex2f((GLfloat)(point.getX() + r), (GLfloat)(point.getY() + r));
+   glVertex2f((GLfloat)(point.getX() - r), (GLfloat)(point.getY() + r));
+
+   // Done!  OK, that was a bit too dramatic
+   glColor3f((GLfloat)1.0 /* red % */, (GLfloat)1.0 /* green % */, (GLfloat)1.0 /* blue % */);
+   glEnd();
 }
