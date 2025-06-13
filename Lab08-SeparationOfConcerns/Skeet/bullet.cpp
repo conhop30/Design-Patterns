@@ -298,9 +298,16 @@ void BulletLogic::death(std::list<Bullet*> & bullets)
 
 /******************************************************************
  * Move
- * kill the bullet
+ * move the bullet
  ****************************************************************/
 void BulletLogic::move(std::list<Effect*> &effects)
 {
-//   this->storage.setDead() = true;
+   // inertia
+   Position pt = storage.getPoint();
+   pt.add(storage.getVelocity());
+   storage.setPoint(pt);
+   
+   // out of bounds checker
+   //   if (isOutOfBounds())
+   //      kill();}
 }

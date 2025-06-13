@@ -24,10 +24,10 @@ class Bullet
 protected:
    static Position dimensions;   // size of the screen
    Position pt;                  // position of the bullet
-   Velocity v;                // velocity of the bullet
-   double radius;             // the size (radius) of the bullet
-   bool dead;                 // is this bullet dead?
-   int value;                 // how many points does this cost?
+   Velocity v;                   // velocity of the bullet
+   double radius;                // the size (radius) of the bullet
+   bool dead;                    // is this bullet dead?
+   int value;                    // how many points does this cost?
     
 public:
    Bullet(double angle = 0.0, double speed = 30.0, double radius = 5.0, int value = 1);
@@ -155,6 +155,7 @@ public:
    
    //setters
    void setValue( int value ) { this->value = value; }
+   void setPoint( Position & pt ) { this->pt = pt;   }
    
 protected:
    static Position dimensions;
