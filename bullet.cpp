@@ -484,22 +484,13 @@ void BulletInterface::drawDot(const Position& point, double radius,
 }
 
 /*********************************************
- * PELLET INTERFACE
- * Create Pellet Interface
- *********************************************/
-PelletInterface::PelletInterface(double angle) 
-{
-    this->logic = new PelletLogic();
-}
-
-/*********************************************
  * PELLET OUTPUT
  * Draw a pellet - just a 3-pixel dot
  *********************************************/
 void PelletInterface::output()
 {
-   if (!logic.isDead())
-      drawDot(logic.getPoint(), 3.0, 1.0, 1.0, 0.0);
+   if (!logic->isDead())
+      drawDot(logic->getPoint(), 3.0, 1.0, 1.0, 0.0);
 }
 
 /*********************************************
@@ -508,13 +499,13 @@ void PelletInterface::output()
  *********************************************/
 void BombInterface::output()
 {
-   if (!logic.isDead())
+   if (!logic->isDead())
    {
        // Bomb actually has a gradient to cut out the harsh edges
-       drawDot(logic.getPoint(), logic.getRadius() + 2.0, 0.50, 0.50, 0.00);
-       drawDot(logic.getPoint(), logic.getRadius() + 1.0, 0.75, 0.75, 0.00);
-       drawDot(logic.getPoint(), logic.getRadius() + 0.0, 0.87, 0.87, 0.00);
-       drawDot(logic.getPoint(), logic.getRadius() - 1.0, 1.00, 1.00, 0.00);
+       drawDot(logic->getPoint(), logic->getRadius() + 2.0, 0.50, 0.50, 0.00);
+       drawDot(logic->getPoint(), logic->getRadius() + 1.0, 0.75, 0.75, 0.00);
+       drawDot(logic->getPoint(), logic->getRadius() + 0.0, 0.87, 0.87, 0.00);
+       drawDot(logic->getPoint(), logic->getRadius() - 1.0, 1.00, 1.00, 0.00);
    }
 }
 
@@ -524,8 +515,8 @@ void BombInterface::output()
  *********************************************/
 void ShrapnelInterface::output()
 {
-    if (!logic.isDead())
-       drawDot(logic.getPoint(), logic.getRadius(), 1.0, 1.0, 0.0);
+    if (!logic->isDead())
+       drawDot(logic->getPoint(), logic->getRadius(), 1.0, 1.0, 0.0);
 }
 
 /*********************************************
@@ -534,12 +525,12 @@ void ShrapnelInterface::output()
  *********************************************/
 void MissileInterface::output()
 {
-    if (!logic.isDead())
+    if (!logic->isDead())
     {
         // missile is a line with a dot at the end so it looks like fins.
-        Position ptNext(logic.getPoint());
-        ptNext.add(logic.getVelocity());
-        drawLine(logic.getPoint(), ptNext, 1.0, 1.0, 0.0);
-        drawDot(logic.getPoint(), 3.0, 1.0, 1.0, 1.0);
+        Position ptNext(logic->getPoint());
+        ptNext.add(logic->getVelocity());
+        drawLine(logic->getPoint(), ptNext, 1.0, 1.0, 0.0);
+        drawDot(logic->getPoint(), 3.0, 1.0, 1.0, 1.0);
     }
 }

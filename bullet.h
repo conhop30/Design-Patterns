@@ -157,6 +157,7 @@ public:
    Position getDimensions() { return dimensions; }
    Velocity getVelocity()   { return v;          }
    double getRadius()       { return radius;     }
+   int getValue()           { return value; }
    int getTimeToDie()       { return timeToDie;  }
    bool isDead()            { return dead; }
    
@@ -181,7 +182,6 @@ protected:
 class BulletLogic
 {
 public:
-   BulletLogic();
    BulletStorage storage;
    
    void kill() { storage.setDead(true); }
@@ -190,6 +190,7 @@ public:
    Velocity getVelocity() { return storage.getVelocity();  }
    double getRadius()     { return storage.getRadius();    }
    Position getPoint()    { return storage.getPoint(); }
+   int getValue()         { return storage.getValue(); }
    BulletStorage getStorage() const { return storage; }
    bool isDead()          { return storage.isDead(); }
    virtual void death(std::list<BulletStorage *> & bullets);
@@ -210,6 +211,7 @@ class BulletInterface
 public:
    BulletLogic* logic;
    
+   virtual void output() {};
    virtual void input(bool isUp, bool isDown, bool isB) {}
    
    
@@ -255,6 +257,8 @@ class ShrapnelLogic : public BulletLogic
  **********************/
 class MissileLogic : public BulletLogic
 {
+   BulletStorage createBulletStorage(double angle, double speed = 10.0, double radius = 1.0, int value = 3) override { return BulletStorage(angle, speed, radius, value); }
+
    void move(std::list<Effect*> & effects) override;
 };
 
@@ -265,8 +269,7 @@ class MissileLogic : public BulletLogic
 class PelletInterface : public BulletInterface
 {
 public:
-   PelletInterface(double angle) {  };
-   void output();
+   void output() override;
 };
 
 /*********************
@@ -276,8 +279,7 @@ public:
 class BombInterface : public BulletInterface
 {
 public:
-   BombInterface(double angle);
-   void output();
+   void output() override;
 };
 
 /*********************
@@ -287,8 +289,7 @@ public:
 class ShrapnelInterface : public BulletInterface
 {
 public:
-   ShrapnelInterface(double angle);
-   void output();
+   void output() override;
 };
 
 /*********************
@@ -298,14 +299,13 @@ public:
 class MissileInterface : public BulletInterface
 {
 public:
-   MissileInterface(double angle);
    void input(bool isUp, bool isDown, bool isB)
    {
       if (isUp)
-         logic.getVelocity().turn(0.04);
+         logic->getVelocity().turn(0.04);
       if (isDown)
-         logic.getVelocity().turn(-0.04);
+         logic->getVelocity().turn(-0.04);
    }
    
-   void output();
+   void output() override;
 };

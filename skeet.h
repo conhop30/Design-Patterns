@@ -54,7 +54,7 @@ private:
 
     Gun gun;                       // the gun
     std::list<Bird*> birds;        // all the shootable birds
-    std::list<BulletStorage*> bullets;    // the bullets
+    std::list<BulletInterface*> bullets;    // the bullets
     std::list<Effect*> effects;    // the fragments of a dead bird.
     std::list<Points>  points;     // point values;
     Time time;                     // how many frames have transpired since the beginning

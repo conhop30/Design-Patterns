@@ -60,7 +60,7 @@ void Skeet::animate()
       hitRatio.adjust(element->isDead() ? -1 : 0);
    }
    for (auto bullet : bullets)
-      bullet->move(effects);
+      bullet->logic->move(effects);
    for (auto effect : effects)
       effect->fly();
    for (auto & pts : points)
@@ -69,17 +69,17 @@ void Skeet::animate()
    // hit detection
    for (auto element : birds)
       for (auto bullet : bullets)
-         if (!element->isDead() && !bullet->isDead() &&
-             element->getRadius() + bullet->getRadius() >
+         if (!element->isDead() && !bullet->logic->isDead() &&
+             element->getRadius() + bullet->logic->getRadius() >
              minimumDistance(element->getPosition(), element->getVelocity(),
-                             bullet->getPosition(),  bullet->getVelocity()))
+                             bullet->logic->getPosition(),  bullet->logic->getVelocity()))
          {
             for (int i = 0; i < 25; i++)
-               effects.push_back(new Fragment(bullet->getPosition(), bullet->getVelocity()));
+               effects.push_back(new Fragment(bullet->logic->getPosition(), bullet->logic->getVelocity()));
             element->kill();
-            bullet->kill();
+            bullet->logic->kill();
             hitRatio.adjust(1);
-            bullet->setValue(-(element->getPoints()));
+            bullet->logic->setValue(-(element->getPoints()));
             element->setPoints(0);
          }
    
@@ -94,14 +94,14 @@ void Skeet::animate()
       }
       else
          ++it;
-       
+
    // remove zombie bullets
    for (auto it = bullets.begin(); it != bullets.end(); )
-      if ((*it)->isDead())
+      if ((*it)->logic->isDead())
       {
-         (*it)->death(bullets);
-         int value = -(*it)->getValue();
-         points.push_back(Points((*it)->getPosition(), value));
+         (*it)->logic->death((*it)->logic->getStorage());
+         int value = -(*it)->logic->storage->getValue();
+         points.push_back(Points((*it)->logic->getPosition(), value));
          score.adjust(value);
          it = bullets.erase(it);
       }
@@ -372,16 +372,23 @@ void Skeet::interact(const UserInput & ui)
    BulletStorage* s = nullptr;
 
    // a pellet can be shot at any time
-   if (ui.isSpace())
-      p = new PelletInterface(gun.getAngle());
-      p.
+   if (ui.isSpace()) 
+   {
+       p = new PelletInterface();
+       p->logic->createBulletStorage(gun.getAngle(), 15.0, 1.0, 1);
+   }
    // missiles can be shot at level 2 and higher
    else if (ui.isM() && time.level() > 1)
-      p = new MissileInterface(gun.getAngle());
+   {
+       p = new MissileInterface();
+       p->logic->createBulletStorage(gun.getAngle(), 10.0, 4.0, 4);
+   }
    // bombs can be shot at level 3 and higher
    else if (ui.isB() && time.level() > 2)
-      p = new BombInterface(gun.getAngle());
-   
+   {
+       p = new BombInterface();
+       p->logic->createBulletStorage(gun.getAngle(), 10.0, 1.0, 4);
+   }
    bullseye = ui.isShift();
 
    // add something if something has been added
